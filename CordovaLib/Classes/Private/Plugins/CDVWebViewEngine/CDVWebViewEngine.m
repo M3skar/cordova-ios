@@ -72,6 +72,10 @@
 - (WKWebViewConfiguration*) createConfigurationFromSettings:(NSDictionary*)settings
 {
     WKWebViewConfiguration* configuration = [[WKWebViewConfiguration alloc] init];
+
+    // fix cors issues when redirecting to local files
+    [configuration setValue:@"TRUE" forKey:@"allowUniversalAccessFromFileURLs"];
+
     configuration.processPool = [[CDVWebViewProcessPoolFactory sharedFactory] sharedProcessPool];
     if (settings == nil) {
         return configuration;
